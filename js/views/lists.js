@@ -48,11 +48,6 @@ TRELLO.views.lists = function(element){
 			var that = this;
 			for (var i = 0; i < cards.length; i++) {
 				var el = cards[i];
-				TRELLO.utils.addListener(el,'click',function(e){
-					if(this.getAttribute('contenteditable')){
-						this.getAttribute('contenteditable',!this.getAttribute('contenteditable'));	
-					}
-				})
 				TRELLO.utils.addListener(el, 'dragstart', function (e) {
 					e.dataTransfer.setData('cardId', this.id);
 					e.dataTransfer.setData('listName', e.currentTarget.parentElement.id);

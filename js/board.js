@@ -16,8 +16,9 @@ TRELLO.boards = (function(){
 		trelloUI.list = TRELLO.views.lists(element);
 
 		trelloUI.list.on(trelloUI.list.ADDNEWLIST,function(){
-			lists.push(new TRELLO.list('test'));
-			loadLists('test', TRELLO.demoCards2);
+			var rand = Math.floor(Math.random() * 3);
+			lists.push(new TRELLO.list('test'+Math.floor(Math.rand()*100)+1));
+			loadLists('test', TRELLO.demoCards+rand);
 		})
 		trelloUI.list.on(trelloUI.list.CARDMOVED, function(cardId,source,destination){
 			var source = findList(source);

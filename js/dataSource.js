@@ -1,5 +1,5 @@
 var TRELLO = TRELLO || {};
-TRELLO.demoCards = [
+TRELLO.demoCards0 = [
 	{
 		title: 'List1',
 		timeStamp: new Date()
@@ -13,7 +13,7 @@ TRELLO.demoCards = [
 		timeStamp: new Date()
 	},
 ];
-TRELLO.demoCards2 = [
+TRELLO.demoCards1 = [
 	{
 		
 		title: 'List2',
@@ -25,6 +25,21 @@ TRELLO.demoCards2 = [
 	},
 	{
 		title: 'List2',
+		timeStamp: new Date()
+	},
+];
+TRELLO.demoCards2 = [
+	{
+		
+		title: 'List3',
+		timeStamp: new Date()
+	},
+	{
+		title: 'List3',
+		timeStamp: new Date()
+	},
+	{
+		title: 'List3',
 		timeStamp: new Date()
 	},
 ]

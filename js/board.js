@@ -16,7 +16,7 @@ TRELLO.boards = (function(){
 		//Add New Card
 		trelloUI.list.on(trelloUI.list.ADDNEWCARD,function(currentList){
 			var list = findList(currentList);
-			list.addCard({title :'fromUI',timeStamp:new Date()});
+			list.addCard({title :'New Task',timeStamp:new Date()});
 			trelloUI.list.addCard(currentList,list.cards[0]);
 
 		});
@@ -25,6 +25,12 @@ TRELLO.boards = (function(){
 			var el = document.getElementById(cardId);
 			var editEl = el.children[0].children[1];
 			if(editEl.innerHTML == "Edit"){
+						//debugger;
+						var allDivs = document.querySelectorAll(".list-card-title");
+						for(var i=0;i<allDivs.length;i++){
+							allDivs[i].setAttribute('contenteditable',false);
+							allDivs[i].nextElementSibling.innerHTML = "Edit";
+						}
 						editEl.previousElementSibling.setAttribute('contenteditable',true);
 						editEl.previousElementSibling.focus();
 						editEl.innerHTML = "Update";	

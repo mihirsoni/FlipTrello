@@ -144,7 +144,6 @@ body {
   display: block;
 }
 .board-view {
-  
   padding: 10px 20px;
 }
 
@@ -315,23 +314,4 @@ button:hover,
     overflow: hidden;
     text-decoration: none;
     word-wrap: break-word;
-}
-.hide {
-    display: none;
-}
-.u-fancy-scrollbar::-webkit-scrollbar {
-    height: 9px;
-    width: 9px
-}
-.u-fancy-scrollbar::-webkit-scrollbar-track-piece:vertical:start {
-    border-radius: 5px 5px 0 0
-}
-.u-fancy-scrollbar::-webkit-scrollbar-track-piece:vertical:end {
-    border-radius: 0 0 5px 5px
-}
-.u-fancy-scrollbar::-webkit-scrollbar-thumb:vertical {
-    background: #c4c9cc;
-    border-radius: 5px;
-    display: block;
-    height: 50px
 }

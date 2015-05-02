@@ -11,7 +11,6 @@ TRELLO.list.render = function(){
 }
 
 TRELLO.list.prototype.addCard = function(card){
-	
 	if(Array.isArray(card)){
 		for(var i = 0, len = card.length; i < len; i+= 1){
 			this.cards.push(new TRELLO.card(card[i]));
@@ -25,8 +24,8 @@ TRELLO.list.prototype.moveCard = function(cardId,source,destination){
 	for (var i = this.cards.length - 1; i >= 0; i--) {
 		if(this.cards[i].id === cardId){
 			var card = document.getElementById(cardId);
-			document.getElementById(destination).appendChild(card);
-			// card.parentNode.removeChild(card);
+			var lastOucc = document.getElementById(destination);
+			lastOucc.insertBefore(card,lastOucc.lastChild);
 			return true;
 		}
 	};

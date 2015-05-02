@@ -11,15 +11,36 @@ TRELLO.boards = (function(){
 		};
 		initUI(element);
 	};
-
 	function initUI(element){
 		trelloUI.list = TRELLO.views.lists(element);
+		//Add New Card
+		trelloUI.list.on('addNewCard',function(currentList){
+			var list = findList(currentList);
+			list.addCard({title :'fromUI',timeStamp:new Date()});
+			trelloUI.list.addCard(currentList,list.cards[0]);
 
-		trelloUI.list.on(trelloUI.list.ADDNEWLIST,function(){
-			var rand = Math.floor(Math.random() * 3);
-			lists.push(new TRELLO.list('test'+Math.floor(Math.rand()*100)+1));
-			loadLists('test', TRELLO.demoCards+rand);
+		});
+		//Edit Existing Item
+		trelloUI.list.on('editItem',function(cardId,currentList){
+			var el = document.getElementById(cardId);
+			var editEl = el.children[0].children[1];
+			if(editEl.innerHTML == "Edit"){
+						editEl.previousElementSibling.setAttribute('contenteditable',true);
+						editEl.previousElementSibling.focus();
+						editEl.innerHTML = "Update";	
+			} else {
+					editEl.previousElementSibling.setAttribute('contenteditable',false);
+					var list =findList(currentList);
+					var card = list.findCard(cardId);
+					card.title = "Testing";
+					editEl.innerHTML = "Edit";
+			}
 		})
+		trelloUI.list.on(trelloUI.list.ADDNEWLIST,function(){
+			var newList = 'newList'+(lists.length+1);
+			lists.push(new TRELLO.list(newList));
+			loadLists(newList, TRELLO.demoCards1);
+		});
 		trelloUI.list.on(trelloUI.list.CARDMOVED, function(cardId,source,destination){
 			var source = findList(source);
 			var dest = findList(destination);

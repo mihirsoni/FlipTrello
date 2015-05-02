@@ -18,7 +18,7 @@
   	<header class="main-header"><h1>Trello</h1></header>
   	<div class="container">
   		<div class="board-view">
-  				<button id="addNewList">Add New List</button>
+  				<button id="addNewList">Add New List</button><br/><br/>
   				<div id="board">
 
   				</div>	
@@ -27,10 +27,10 @@
   	<script type="text/html" id="cardItemTemplate">
   		<div id="{{card_id}}" draggable=true class="list-card">
   			<div class="list-card-details">
-  				<a class="list-card-title" href="#">
+  				<a class="list-card-title left" href="#">
   					{{title}}
   				</a>
-  				<a href="#">Edit</a>
+  				<a href="#" class="right">Edit</a>
   			</div>
 		</div>	  		
   	</script>

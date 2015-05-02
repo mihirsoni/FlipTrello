@@ -143,11 +143,6 @@ body {
   content: "";
   display: block;
 }
-.side-bar {
-  float: left;
-  width: 250px;
-  padding: 10px 20px;
-}
 .board-view {
   
   padding: 10px 20px;
@@ -198,6 +193,8 @@ button:hover,
     -webkit-box-align: start;
     align-items: flex-start;
     display: flex;
+    display:-webkit-flex;
+    display:-ms-flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     margin-bottom: 10px;
@@ -299,14 +296,24 @@ button:hover,
     color: rgb(77, 77, 77);
 }
 .list-card-details {
-    overflow: auto;
+    overflow: hidden;
     padding: 6px 8px 4px;
+    padding: 15px;
     position: relative;
     z-index: 10;
 }
+.list-card-details .right{
+    float: right;
+ 
+}
+.list-card-details .left{
+    overflow: hidden;
+    width: 80%;
+}
+
 .list-card-title {
     clear: both;
-    display: block;
+    
     font-weight: 400;
     margin: 0px 0px 4px;
     overflow: hidden;

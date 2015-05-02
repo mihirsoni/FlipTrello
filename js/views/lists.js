@@ -6,13 +6,15 @@ TRELLO.views = TRELLO.views || {};
 TRELLO.views.lists = function(element){
 	var addListButton = document.getElementById('addNewList'),	
 	cardTemplate = document.getElementById('cardItemTemplate').innerHTML,
+	listHeaderTemplate = document.getElementById('listHeaderTemplate').innerHTML,
 	el = element,
 	subscribedEvents = [],
 	list,
 	addNewList = "addNewList",
 	cardMoved = 'cardMoved',
 	cardEdit = 'cardEdit',
-	addNewCard = 'addNewCard'
+	listHeaderEdit = 'listHeaderEdit',
+	addNewCard = 'addNewCard';
 	TRELLO.utils.addListener( addListButton, 'click', function(){
 		if(subscribedEvents[addNewList]){
 			subscribedEvents[addNewList]();
@@ -21,15 +23,11 @@ TRELLO.views.lists = function(element){
 
 
 	function render(activeList){
-		var cur = document.getElementById(activeList.name);
-		if(cur) {
-			cur.remove();
-		}
 		var newList = document.createElement('div');
 		newList.setAttribute('id',activeList.name);
 		newList.setAttribute('class','list');
-		var html = '<div class="list-header" attr="name"><h2 class="list-header-name">'+activeList.name+'</h2></div>',
-		card;
+		var html = listHeaderTemplate.replace(/{{header}}/g, activeList.name);
+		var card;
 		list = activeList;
 
 		if(list.cards.length > 0){
@@ -75,7 +73,15 @@ TRELLO.views.lists = function(element){
 	}
 
 	function initDnD(activeList){
-		//Attach Events
+		//Attach event to header
+
+		var header = document.querySelector('#'+activeList.name+' .headerEdit')
+		TRELLO.utils.addListener(header,'click',function(e){
+			if(subscribedEvents[listHeaderEdit]){
+				subscribedEvents[listHeaderEdit](activeList.name);
+			}
+		})
+		//Attach Events to all cards
 		var cards = document.querySelectorAll('#'+activeList.name+' .list-card');
 		console.log(cards.length);
 		var that = this;
@@ -136,7 +142,8 @@ TRELLO.views.lists = function(element){
 			CARDMOVED: cardMoved,
 			ADDNEWLIST : addNewList,
 			CARDEDIT : cardEdit,
-			ADDNEWCARD: addNewCard
+			ADDNEWCARD: addNewCard,
+			LISTHEADEREDIT:listHeaderEdit
 		}
 	}
 

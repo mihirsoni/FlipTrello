@@ -13,6 +13,37 @@ TRELLO.boards = (function(){
 	};
 	function initUI(element){
 		trelloUI.list = TRELLO.views.lists(element);
+		//Edit List Name 
+		trelloUI.list.on(trelloUI.list.LISTHEADEREDIT,function(currentList){
+			var el = document.querySelectorAll("#"+currentList+" .headerEdit")
+			var editEl = el[0];
+			if(editEl.innerHTML == "Edit"){
+				var allDivs = document.querySelectorAll(".list-header-name");
+				for(var i=0;i<allDivs.length;i++){
+						allDivs[i].setAttribute('contenteditable',false);
+						allDivs[i].nextElementSibling.innerHTML = "Edit";
+				}
+				editEl.previousElementSibling.setAttribute('contenteditable',true);
+				editEl.previousElementSibling.focus();
+				editEl.innerHTML = "Update";
+
+			} else {
+				var name = editEl.previousElementSibling.innerHTML
+				if(name.trim() == ""){
+					alert('Please enter List Name');
+					editEl.previousElementSibling.focus();
+					return false;
+				}
+				editEl.previousElementSibling.setAttribute('contenteditable',false);
+				//Update the list Name Details
+				var list =findList(currentList);
+				list.name = name.trim();
+				//Update the List ID of dom as our list realy on DIV#ID
+				var updateListId = document.getElementById(currentList);
+				updateListId.setAttribute('id',name.trim());
+				editEl.innerHTML = "Edit";
+			}
+		})
 		//Add New Card
 		trelloUI.list.on(trelloUI.list.ADDNEWCARD,function(currentList){
 			var list = findList(currentList);
@@ -25,7 +56,7 @@ TRELLO.boards = (function(){
 			var el = document.getElementById(cardId);
 			var editEl = el.children[0].children[1];
 			if(editEl.innerHTML == "Edit"){
-						//debugger;
+						//Make all div non editable;
 						var allDivs = document.querySelectorAll(".list-card-title");
 						for(var i=0;i<allDivs.length;i++){
 							allDivs[i].setAttribute('contenteditable',false);
@@ -38,7 +69,7 @@ TRELLO.boards = (function(){
 					editEl.previousElementSibling.setAttribute('contenteditable',false);
 					var list =findList(currentList);
 					var card = list.findCard(cardId);
-					card.title = "Testing";
+					card.title = editEl.previousElementSibling.innerHTML
 					editEl.innerHTML = "Edit";
 			}
 		})

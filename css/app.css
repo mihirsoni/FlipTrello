@@ -215,16 +215,12 @@ button:hover,
 #board::-webkit-scrollbar-thumb:vertical {
     background: rgba(255, 255, 255, 0.4);
 }
+/*Safari Fix*/
+*[contenteditable] {
+    -webkit-user-select: auto !important;
+}
 #board::-webkit-scrollbar-track-piece {
     background: rgba(0, 0, 0, 0.14902);
-}
-#board::-webkit-scrollbar-button {
-    display: block;
-    height: 5px;
-    width: 5px;
-}
-.body-no-webkit-scrollbars:not(.firefox) #board {
-    padding-bottom: 30px;
 }
 .list {
     border-radius: 3px;

@@ -14,14 +14,14 @@ TRELLO.boards = (function(){
 	function initUI(element){
 		trelloUI.list = TRELLO.views.lists(element);
 		//Add New Card
-		trelloUI.list.on('addNewCard',function(currentList){
+		trelloUI.list.on(trelloUI.list.ADDNEWCARD,function(currentList){
 			var list = findList(currentList);
 			list.addCard({title :'fromUI',timeStamp:new Date()});
 			trelloUI.list.addCard(currentList,list.cards[0]);
 
 		});
-		//Edit Existing Item
-		trelloUI.list.on('editItem',function(cardId,currentList){
+		//Edit Existing card Title
+		trelloUI.list.on(trelloUI.list.CARDEDIT,function(cardId,currentList){
 			var el = document.getElementById(cardId);
 			var editEl = el.children[0].children[1];
 			if(editEl.innerHTML == "Edit"){

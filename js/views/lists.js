@@ -9,8 +9,10 @@ TRELLO.views.lists = function(element){
 	el = element,
 	subscribedEvents = [],
 	list,
-	addNewList = "addNewList";
-	cardMoved = 'cardMoved';
+	addNewList = "addNewList",
+	cardMoved = 'cardMoved',
+	cardEdit = 'cardEdit',
+	addNewCard = 'addNewCard'
 	TRELLO.utils.addListener( addListButton, 'click', function(){
 		if(subscribedEvents[addNewList]){
 			subscribedEvents[addNewList]();
@@ -58,8 +60,8 @@ TRELLO.views.lists = function(element){
 		});
 		var editEl = newCard.children[0].children[1];
 		TRELLO.utils.addListener(editEl,'click',function(e) {
-			if(subscribedEvents['editItem']){
-				subscribedEvents['editItem'](e.currentTarget.parentElement.parentElement.id,activeList);
+			if(subscribedEvents[cardEdit]){
+				subscribedEvents[cardEdit](e.currentTarget.parentElement.parentElement.id,activeList);
 			} 
 		});	
 	}
@@ -86,8 +88,8 @@ TRELLO.views.lists = function(element){
 			//Edit listener
 			var editEl = cards[i].children[0].children[1];
 				TRELLO.utils.addListener(editEl,'click',function(e) {
-					if(subscribedEvents['editItem']){
-						subscribedEvents['editItem'](e.currentTarget.parentElement.parentElement.id,activeList.name);
+					if(subscribedEvents[cardEdit]){
+						subscribedEvents[cardEdit](e.currentTarget.parentElement.parentElement.id,activeList.name);
 					} 
 				});	
 			}
@@ -95,8 +97,8 @@ TRELLO.views.lists = function(element){
 			console.log(addCard[0].onclick);
 			if(addCard[0].onclick == null){
 				TRELLO.utils.addListener(addCard[0],'click',function(e){
-				if(subscribedEvents['addNewCard']){
-					subscribedEvents['addNewCard'](activeList.name);
+				if(subscribedEvents[addNewCard]){
+					subscribedEvents[addNewCard](activeList.name);
 				}
 			});	
 			}
@@ -132,7 +134,9 @@ TRELLO.views.lists = function(element){
 			addCard:addCard,
 			on: on,
 			CARDMOVED: cardMoved,
-			ADDNEWLIST : addNewList
+			ADDNEWLIST : addNewList,
+			CARDEDIT : cardEdit,
+			ADDNEWCARD: addNewCard
 		}
 	}
 

@@ -83,7 +83,6 @@ TRELLO.views.lists = function(element){
 		})
 		//Attach Events to all cards
 		var cards = document.querySelectorAll('#'+activeList.name+' .list-card');
-		console.log(cards.length);
 		var that = this;
 		for (var i = 0; i < cards.length; i++) {
 			var el = cards[i];
